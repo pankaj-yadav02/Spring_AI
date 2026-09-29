@@ -1,7 +1,6 @@
 package com.pankaj.claudeai.controller;
 
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +19,13 @@ public class ChatController {
 
   @GetMapping("/chat")
   public String chat(@RequestParam String message){
-    return chatClient.prompt(message).call().content();
+    return chatClient.prompt().
+                     system("you are an internal HR assistant. Your role is to help employees with questions related "
+                            + "to HR policies such as leave policies, working hours, benefits, and code to conduct. "
+                            + "If a user asks for help with anything outside of these topics, kindly inform them that"
+                            + " you can only assist with queries related to HR policies.").
+            user(message).call().content();
+
   }
 }
 
