@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: claudeai
+  ai:
+    anthropic:
+      api-key: ${CLAUDE_API_KEY}
+logging:
+  pattern:
+    console: '%green(%d{HH:mm:ss.SSS}) %blue(%-5level) %red([]) %yellow(%logger{15}) - %msg%n'
